@@ -33,14 +33,14 @@ namespace MuSeoun_Engine
 				Update();
 				Render();
 
-				chrono::system_clock::time_point startFPSTimePoint = chrono::system_clock::now();
+				chrono::system_clock::time_point startFPS = chrono::system_clock::now();
 				system("cls");
 
-				chrono::duration<double> durationFPS = chrono::system_clock::now() - startFPSTimePoint;
+				chrono::duration<double> endFPS = chrono::system_clock::now() - startFPS;
+				cout << "FPS : " << endFPS.count() << "sec" << endl;
 
-				cout << "FPS : " << durationFPS.count() << "sec" << endl;
-
-				int remainingFrameTime = 600 - (durationFPS.count() * 1000.0);
+				int remainingFrameTime = 1000/60 - (endFPS.count());
+				//int remainingFrameTime = 600 - (endFPS.count() * 1000.0);
 
 				if (remainingFrameTime > 0)
 					this_thread::sleep_for(chrono::milliseconds(remainingFrameTime));
