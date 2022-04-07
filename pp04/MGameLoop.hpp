@@ -40,7 +40,6 @@ namespace MuSeoun_Engine
 				cout << "FPS : " << endFPS.count() << "sec" << endl;
 
 				int remainingFrameTime = 1000/60 - (endFPS.count());
-				//int remainingFrameTime = 600 - (endFPS.count() * 1000.0);
 
 				if (remainingFrameTime > 0)
 					this_thread::sleep_for(chrono::milliseconds(remainingFrameTime));
