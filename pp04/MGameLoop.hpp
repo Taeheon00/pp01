@@ -37,9 +37,11 @@ namespace MuSeoun_Engine
 				system("cls");
 
 				chrono::duration<double> endFPS = chrono::system_clock::now() - startFPS;
-				cout << "FPS : " << endFPS.count() << "sec" << endl;
+				
 
-				int remainingFrameTime = 1000/60 - (endFPS.count());
+				int remainingFrameTime = 60-(endFPS.count());
+
+				cout << "FPS : " << endFPS.count()*1000 << "sec" << endl;
 
 				if (remainingFrameTime > 0)
 					this_thread::sleep_for(chrono::milliseconds(remainingFrameTime));
