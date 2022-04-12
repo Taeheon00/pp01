@@ -1,8 +1,8 @@
 #pragma once
-#include <iostream>
 #include <chrono>
 #include <thread>
-#include <Windows.h>
+#include "MConsolUtil.hpp"
+#include "Player.hpp"
 
 using namespace std;
 
@@ -11,108 +11,97 @@ namespace MuSeoun_Engine
 	class MGameLoop
 	{
 	private :
-		bool _isGameRunning;
-
+		bool _isGameRunning;	
+		MConsoleRenderer cRenderer;
+		chrono::system_clock::time_point startRenderTimePoint;
+		chrono::duration<double> renderDuration;
+		Player p;
+		
 	public :
-
-		MGameLoop()
-		{
-			_isGameRunning = false;
-		}
+		MGameLoop() 	{	_isGameRunning = false;		}
 		~MGameLoop() {}
 
 		void Run()
 		{
 			_isGameRunning = true;
-
 			Initialize();
 
+			startRenderTimePoint = chrono::system_clock::now();
 			while (_isGameRunning)
 			{
+				
 				Input();
 				Update();
 				Render();
-
-				chrono::system_clock::time_point startFPS = chrono::system_clock::now();
-				system("cls");
-
-				chrono::duration<double> endFPS = chrono::system_clock::now() - startFPS;
 				
 
-				int remainingFrameTime = 60-(endFPS.count());
-
-				cout << "FPS : " << endFPS.count()*1000 << "sec" << endl;
-
-				if (remainingFrameTime > 0)
-					this_thread::sleep_for(chrono::milliseconds(remainingFrameTime));
-
-
 			}
-
 			Release();
-
 		}
-
 		void Stop()
 		{
 			_isGameRunning = false;
 		}
 
 	private :
-
 		void Initialize()
 		{
-			SetCursorState(false);
+			
+		}
+		void Release() 
+		{
 		}
 
 		void Input()
 		{
-			if (GetAsyncKeyState(VK_SPACE) == -0x8000 || GetAsyncKeyState(VK_SPACE) == -0x8001)
-			{
-				
+			if (GetAsyncKeyState(VK_SPACE) & 0x8000 || GetAsyncKeyState(VK_SPACE) & 0x8001)
+			{ 
+				p.isKeyPressed();
 			}
 			else 
 			{
-				
+				p.isKeyUnpressed();
 			}
+
 		}
 		void Update()
 		{
-		
+			
 		}
 		void Render()
 		{
-			/*chrono::system_clock::time_point startRenderTimePoint = chrono::system_clock::now();
-			system("cls");
+			
+			cRenderer.Clear();
+			
 
-			chrono::duration<double> renderDuration = chrono::system_clock::now() - startRenderTimePoint;
-			cout << "Rendering speed : " << renderDuration.count() << "sec" << endl;
+			cRenderer.MoveCursor(p.x, p.y);
+			cRenderer.DrawString("P");
+			
+			
+			cRenderer.MoveCursor(10, 20);
+			renderDuration = chrono::system_clock::now() - startRenderTimePoint;
+			startRenderTimePoint = chrono::system_clock::now();
+			string fps = "FPS : " + to_string(1.0 / renderDuration.count());
+			cRenderer.DrawString(fps);
 
-			int remainingFrameTime = 100 - (renderDuration.count() * 1000.0);
-
-			if (remainingFrameTime > 0)
-				this_thread::sleep_for(chrono::milliseconds(remainingFrameTime));*/
-					
+			this_thread::sleep_for(chrono::milliseconds(20));
 		}
 
-		void Release(){}
 
-	private: //게임 사용 함수
+			////cout << "Rendering speed : " << renderDuration.count() << "sec" << endl;
 
-		void MoveCursor(short x, short y)
-		{
-			COORD position = { x , y };
-			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position);
-		}
+			//int remainingFrameTime = 100 - (int)(renderDuration.count() * 1000.0);
+			//if (remainingFrameTime > 0)
+			//	this_thread::sleep_for(chrono::milliseconds(remainingFrameTime));
+		
 
-		void SetCursorState(bool visible)
-		{
-			CONSOLE_CURSOR_INFO consoleCursorInfo;
-			consoleCursorInfo.bVisible = visible;
-			consoleCursorInfo.dwSize = 1;
-
-			SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &consoleCursorInfo);
-		}
-
+				
+		
 	};
+
+	
+
+
+	
+
 }
