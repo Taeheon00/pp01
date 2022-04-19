@@ -72,13 +72,15 @@ namespace MuSeoun_Engine
 		{
 			
 			cRenderer.Clear();
-			
+
 
 			cRenderer.MoveCursor(p.x, p.y);
+			cRenderer.enemy(p.x, p.y);
 			cRenderer.DrawString("P");
-			
-			
+
+
 			cRenderer.MoveCursor(10, 20);
+			cRenderer.enemy(30, 20);
 			renderDuration = chrono::system_clock::now() - startRenderTimePoint;
 			startRenderTimePoint = chrono::system_clock::now();
 			string fps = "FPS : " + to_string(1.0 / renderDuration.count());
