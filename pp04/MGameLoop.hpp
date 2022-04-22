@@ -11,31 +11,33 @@ namespace MuSeoun_Engine
 {
 	class MGameLoop
 	{
-	private :
-		bool _isGameRunning;	
+	private:
+		bool _isGameRunning;
 		MConsoleRenderer cRenderer;
 		chrono::system_clock::time_point startRenderTimePoint;
 		chrono::duration<double> renderDuration;
 		Player p;
 		Enemy e;
-		
-	public :
-		MGameLoop() 	{	_isGameRunning = false;		}
+		int score;
+
+	public:
+		MGameLoop() { _isGameRunning = false; }
 		~MGameLoop() {}
 
 		void Run()
 		{
 			_isGameRunning = true;
+			score = 0;
 			Initialize();
 
 			startRenderTimePoint = chrono::system_clock::now();
 			while (_isGameRunning)
 			{
-				
+
 				Input();
 				Update();
 				Render();
-				
+
 
 			}
 			Release();
@@ -45,22 +47,22 @@ namespace MuSeoun_Engine
 			_isGameRunning = false;
 		}
 
-	private :
+	private:
 		void Initialize()
 		{
-			
+
 		}
-		void Release() 
+		void Release()
 		{
 		}
 
 		void Input()
 		{
 			if (GetAsyncKeyState(VK_SPACE) & 0x8000 || GetAsyncKeyState(VK_SPACE) & 0x8001)
-			{ 
+			{
 				p.isKeyPressed();
 			}
-			else 
+			else
 			{
 				p.isKeyUnpressed();
 			}
@@ -68,15 +70,15 @@ namespace MuSeoun_Engine
 		}
 		void Update()
 		{
-			
+
 		}
 		void Render()
 		{
-			
+
 			cRenderer.Clear();
 			e.enemymove();
 
-			if ((e.x == p.x)&&(e.y==p.y))
+			if ((e.x == p.x) && (e.y == p.y))
 			{
 				e.Enemycheck = true;
 			}
@@ -89,7 +91,26 @@ namespace MuSeoun_Engine
 			if (e.Enemycheck)
 			{
 				cRenderer.Clear();
+				cRenderer.MoveCursor(20, 6);
+				cRenderer.DrawString("Game Over!");
+				cRenderer.MoveCursor(20, 7);
+				cRenderer.DrawString("Please SPACE Bar Key Pressed Game Restart");
+				Stop();
+				while (e.Enemycheck) {
+					if (GetAsyncKeyState(VK_SPACE) & 0x8000 || GetAsyncKeyState(VK_SPACE) & 0x8001) {
+						e.Enemycheck = false;
+						e.x = 50; e.y = 7;
+						Run();
+						break;
+					}
+				}
 			}
+			if (e.x == 19)
+				score += 1;
+			string SCORE = "score: " + to_string(score);
+
+			cRenderer.MoveCursor(0,1);
+			cRenderer.DrawString(SCORE);
 
 			cRenderer.MoveCursor(p.x, p.y);
 			cRenderer.DrawString("P");
@@ -97,7 +118,7 @@ namespace MuSeoun_Engine
 			cRenderer.MoveCursor(e.x, e.y);
 			cRenderer.DrawString("E");
 
-			cRenderer.MoveCursor(10, 20);
+			cRenderer.MoveCursor(0, 0);
 			renderDuration = chrono::system_clock::now() - startRenderTimePoint;
 			startRenderTimePoint = chrono::system_clock::now();
 			string fps = "FPS : " + to_string(1.0 / renderDuration.count());
@@ -107,20 +128,11 @@ namespace MuSeoun_Engine
 		}
 
 
-			////cout << "Rendering speed : " << renderDuration.count() << "sec" << endl;
+		////cout << "Rendering speed : " << renderDuration.count() << "sec" << endl;
 
-			//int remainingFrameTime = 100 - (int)(renderDuration.count() * 1000.0);
-			//if (remainingFrameTime > 0)
-			//	this_thread::sleep_for(chrono::milliseconds(remainingFrameTime));
-		
+		//int remainingFrameTime = 100 - (int)(renderDuration.count() * 1000.0);
+		//if (remainingFrameTime > 0)
+		//	this_thread::sleep_for(chrono::milliseconds(remainingFrameTime));
 
-				
-		
 	};
-
-	
-
-
-	
-
 }
