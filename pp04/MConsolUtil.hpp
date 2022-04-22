@@ -19,12 +19,6 @@ namespace MuSeoun_Engine
 			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position);
 		}
 
-		void enemy(short x, short y)
-		{
-			COORD position = { x , y };
-			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position);
-		}
-
 		void SetCursorState(bool visible)
 		{
 			CONSOLE_CURSOR_INFO consoleCursorInfo;
