@@ -4,6 +4,7 @@
 #include "MConsolUtil.hpp"
 #include "Player.hpp"
 #include "Enemy.hpp"
+#include <cstdlib>
 
 using namespace std;
 
@@ -18,7 +19,8 @@ namespace MuSeoun_Engine
 		chrono::duration<double> renderDuration;
 		Player p;
 		Enemy e;
-		int score;
+		int score = 0;
+		int bestscore =0;
 
 	public:
 		MGameLoop() { _isGameRunning = false; }
@@ -27,7 +29,6 @@ namespace MuSeoun_Engine
 		void Run()
 		{
 			_isGameRunning = true;
-			score = 0;
 			Initialize();
 
 			startRenderTimePoint = chrono::system_clock::now();
@@ -50,7 +51,7 @@ namespace MuSeoun_Engine
 	private:
 		void Initialize()
 		{
-
+			score = 0;
 		}
 		void Release()
 		{
@@ -66,7 +67,6 @@ namespace MuSeoun_Engine
 			{
 				p.isKeyUnpressed();
 			}
-
 		}
 		void Update()
 		{
@@ -84,30 +84,37 @@ namespace MuSeoun_Engine
 			}
 			else if (e.x == 0)
 			{
-				e.x = 50;
+				e.x = rand() % 36 + 27;
 				e.Enemycheck = false;
 			}
+
+			if (e.x == 19)
+				score += 1;
+			string SCORE = "Score: " + to_string(score);
+
+			if (score >= bestscore)
+				bestscore = score;
+			string BESTSCORE = "BestScore: " + to_string(bestscore);
 
 			if (e.Enemycheck)
 			{
 				cRenderer.Clear();
-				cRenderer.MoveCursor(20, 6);
+				cRenderer.MoveCursor(35, 6);
 				cRenderer.DrawString("Game Over!");
 				cRenderer.MoveCursor(20, 7);
 				cRenderer.DrawString("Please SPACE Bar Key Pressed Game Restart");
+				cRenderer.MoveCursor(35, 8);
+				cRenderer.DrawString(BESTSCORE);
 				Stop();
 				while (e.Enemycheck) {
 					if (GetAsyncKeyState(VK_SPACE) & 0x8000 || GetAsyncKeyState(VK_SPACE) & 0x8001) {
 						e.Enemycheck = false;
-						e.x = 50; e.y = 7;
+						e.x = rand() % 36 + 27; e.y = 7;
 						Run();
 						break;
 					}
 				}
 			}
-			if (e.x == 19)
-				score += 1;
-			string SCORE = "score: " + to_string(score);
 
 			cRenderer.MoveCursor(0,1);
 			cRenderer.DrawString(SCORE);

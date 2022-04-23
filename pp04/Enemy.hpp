@@ -1,3 +1,5 @@
+#include <cstdlib>
+
 class Enemy
 {
 public:
@@ -5,7 +7,7 @@ public:
 	bool Enemycheck;
 	Enemy()
 	{
-		x = 50;
+		x = rand() % 36 + 27;
 		y = 7;
 		Enemycheck = false;
 	}
