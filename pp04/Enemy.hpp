@@ -19,6 +19,10 @@ public:
 	void enemymove()
 	{
 		x -= 1;
+		if (x == 0)
+		{
+			x = rand() % 36 + 27;
+		}
 	}
 
 };

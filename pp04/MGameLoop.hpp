@@ -45,16 +45,17 @@ namespace MuSeoun_Engine
 		}
 		void Stop()
 		{
-			_isGameRunning = false;
+
 		}
 
 	private:
 		void Initialize()
 		{
-			score = 0;
+
 		}
 		void Release()
 		{
+
 		}
 
 		void Input()
@@ -82,11 +83,6 @@ namespace MuSeoun_Engine
 			{
 				e.Enemycheck = true;
 			}
-			else if (e.x == 0)
-			{
-				e.x = rand() % 36 + 27;
-				e.Enemycheck = false;
-			}
 
 			if (e.x == 19)
 				score += 1;
@@ -95,26 +91,6 @@ namespace MuSeoun_Engine
 			if (score >= bestscore)
 				bestscore = score;
 			string BESTSCORE = "BestScore: " + to_string(bestscore);
-
-			if (e.Enemycheck)
-			{
-				cRenderer.Clear();
-				cRenderer.MoveCursor(35, 6);
-				cRenderer.DrawString("Game Over!");
-				cRenderer.MoveCursor(20, 7);
-				cRenderer.DrawString("Please SPACE Bar Key Pressed Game Restart");
-				cRenderer.MoveCursor(35, 8);
-				cRenderer.DrawString(BESTSCORE);
-				Stop();
-				while (e.Enemycheck) {
-					if (GetAsyncKeyState(VK_SPACE) & 0x8000 || GetAsyncKeyState(VK_SPACE) & 0x8001) {
-						e.Enemycheck = false;
-						e.x = rand() % 36 + 27; e.y = 7;
-						Run();
-						break;
-					}
-				}
-			}
 
 			cRenderer.MoveCursor(0,1);
 			cRenderer.DrawString(SCORE);
@@ -132,6 +108,30 @@ namespace MuSeoun_Engine
 			cRenderer.DrawString(fps);
 
 			this_thread::sleep_for(chrono::milliseconds(20));
+
+			if (e.Enemycheck)
+			{
+				cRenderer.Clear();
+				cRenderer.MoveCursor(35, 6);
+				cRenderer.DrawString("Game Over!");
+				cRenderer.MoveCursor(20, 7);
+				cRenderer.DrawString("Please SPACE Bar Key Pressed Game Restart");
+				cRenderer.MoveCursor(35, 8);
+				cRenderer.DrawString(BESTSCORE);
+				cRenderer.MoveCursor(37, 9);
+				cRenderer.DrawString(SCORE);
+				cRenderer.MoveCursor(0, 0);
+				cRenderer.DrawString(fps);
+
+				while (e.Enemycheck) {
+					if (GetAsyncKeyState(VK_SPACE) & 0x8000 || GetAsyncKeyState(VK_SPACE) & 0x8001) {
+						e.Enemycheck = false;
+						e.x = rand() % 36 + 27; e.y = 7;
+						score = 0; 
+						break;
+					}
+				}
+			}
 		}
 
 
