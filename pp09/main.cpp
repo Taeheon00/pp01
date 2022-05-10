@@ -44,9 +44,6 @@ int main(void)
         glVertex2f(0.5, -0.5);
         glEnd();
 
-
-    출처: https://wonjayk.tistory.com/30 [배고파서 까먹고 만든 블로그]
-
         glfwSwapBuffers(window);
         glfwPollEvents(); //현재 Frame의 입력 및 출력 이벤트를 모두 처리 poll=게속확인하는작업
     }
