@@ -1,0 +1,5 @@
+﻿  main.cpp
+C:\Users\YUHAN\Desktop\pp01\pp09\main.cpp(40,30): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\YUHAN\Desktop\pp01\pp09\main.cpp(48,11): warning C4102: '출처': 참조되지 않은 레이블입니다.
+C:\Users\YUHAN\Desktop\pp01\pp09\main.cpp(48,18): warning C4102: 'https': 참조되지 않은 레이블입니다.
+  pp09.vcxproj -> C:\Users\YUHAN\Desktop\pp01\x64\Debug\pp09.exe
