@@ -19,7 +19,7 @@ int main(void)
     glfwSetErrorCallback(error_callback);
     if (!glfwInit()) //glfw를 초기화 하여, Window 생성을 할 수 있는 상태로 설정해준다.
         exit(EXIT_FAILURE); //비정상 종료
-    window = glfwCreateWindow(640, 480, "Simple example", NULL, NULL); //glfw 윈도우창 생성
+    window = glfwCreateWindow(800, 480, "Simple example", NULL, NULL); //glfw 윈도우창 생성
     if (!window)
     {
         glfwTerminate(); //사용된 메모리 삭제
@@ -35,14 +35,19 @@ int main(void)
 
     while (!glfwWindowShouldClose(window)) //윈도우창이 종료됬는지 확인
     {
-        glClearColor(0, 0, 1, 1); //배경색
+        glClearColor(1, 1, 1, 0); //배경색
         glClear(GL_COLOR_BUFFER_BIT); //색상버퍼 지움
-        glColor3f(0.8, 1, 0.8); // 내부 도형색
+        glColor3f(0.81, 1, 0.89); // 내부 도형색
         glBegin(GL_TRIANGLES); //삼각형을 그려라
-        glVertex2f(0.0, 0.5);
-        glVertex2f(-0.5, -0.5);
-        glVertex2f(0.5, -0.5);
+        glVertex3f(-0.75, -0.6,0);
+        glVertex3f(-0.9, -0.9,0);
+        glVertex3f(-0.6, -0.9,0);
         glEnd();
+
+        glLoadIdentity();
+
+        glTranslatef(-0.5, 0, 0);
+        glScalef(0.5, 0.5, 0.5);
 
         glfwSwapBuffers(window);
         glfwPollEvents(); //현재 Frame의 입력 및 출력 이벤트를 모두 처리 poll=게속확인하는작업
