@@ -33,6 +33,9 @@ int main(void)
     glfwGetFramebufferSize(window, &width, &height); //프레임 버퍼 사이즈 지정    
     ratio = width / (float)height;
 
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+
     while (!glfwWindowShouldClose(window)) //윈도우창이 종료됬는지 확인
     {
         /*glClearColor(1, 1, 1, 0); //배경색
@@ -44,21 +47,31 @@ int main(void)
         glVertex3f(-0.6, -0.9,0);
         glEnd();*/
 
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-
-        glClearColor(0.3, 0.3, 0.3, 1);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        glColor4f(1, 0, 0, 1);
         glBegin(GL_TRIANGLES);
-        glVertex2f(0.9, -0.6);
-        glVertex2f(0.9, -0.9);
-        glVertex2f(0.6, -0.9);
+        glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
+        glVertex3f(0.0f, 1.0f, 0.0f);
+        glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
+        glVertex3f(1.0f, -1.0f, 0.0f);
+        glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
+        glVertex3f(-1.0f, -1.0f, 0.0f);
+        glEnd();
+
         glBegin(GL_TRIANGLES);
-        glVertex2f(-0.75, -0.6);
-        glVertex2f(-0.9, -0.9);
-        glVertex2f(-0.6, -0.9);
+        glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
+        glVertex2f(0.0f, 1.0f);
+
+        glVertex2f(1.0f, -1.0f);
+
+        glVertex2f(-1.0f, -1.0f);
+        glEnd();
+
+        glBegin(GL_TRIANGLES);
+        glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
+        glVertex2f(0.0f, 1.0f);
+
+        glVertex2f(1.0f, -1.0f);
+
+        glVertex2f(-1.0f, -1.0f);
         glEnd();
 
         glfwSwapBuffers(window);
