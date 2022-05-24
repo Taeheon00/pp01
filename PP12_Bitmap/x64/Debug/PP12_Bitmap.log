@@ -1,0 +1,9 @@
+﻿  PP12_Bitmap.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': 매크로 재정의
+C:\vcpkg\installed\x64-windows\include\GLFW\glfw3.h(123): message : 'APIENTRY'의 이전 정의를 참조하십시오.
+C:\Users\YUHAN\Desktop\p2\PP12_Bitmap\PP12_Bitmap.cpp(8,10): fatal error C1083: 포함 파일을 열 수 없습니다. 'MMath.hpp': No such file or directory
+  test.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': 매크로 재정의
+C:\vcpkg\installed\x64-windows\include\GLFW\glfw3.h(123): message : 'APIENTRY'의 이전 정의를 참조하십시오.
+C:\Users\YUHAN\Desktop\p2\PP12_Bitmap\test.cpp(8,10): fatal error C1083: 포함 파일을 열 수 없습니다. 'MMath.hpp': No such file or directory
+  코드를 생성하고 있습니다...

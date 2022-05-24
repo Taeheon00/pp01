@@ -1,2 +1,2 @@
 ﻿  main.cpp
-  pp09.vcxproj -> C:\Users\s\Desktop\c++\pp01\x64\Debug\pp09.exe
+LINK : fatal error LNK1104: 'C:\Users\YUHAN\Desktop\p1\packages\glfw.3.3.7\build\native\lib\dynamic\v143\x64\glfw3dll.lib' 파일을 열 수 없습니다.

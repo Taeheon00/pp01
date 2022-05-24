@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{13f1bfbe-a817-4847-877a-754258917968}</ProjectGuid>
-    <RootNamespace>pp11</RootNamespace>
+    <ProjectGuid>{ba2d15c4-c77a-47c4-a5ab-aefc8303d3f1}</ProjectGuid>
+    <RootNamespace>PP12Texture</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -139,11 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="PP12_Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MMath.hpp" />
     <ClInclude Include="Player.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="lena_gray.bmp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
